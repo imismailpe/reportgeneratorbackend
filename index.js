@@ -7,9 +7,9 @@ const portNumber = process.env.PORT || PORT;
 app.use(cors());
 app.use(express.urlencoded());
 app.use(express.json());
-
+app.set('port', portNumber)
 app.get('/', (req, res) => res.send('welcome to reportgenerator backend api'));
 
-app.listen(PORT,
+app.listen(portNumber,
     process.env.HOST || '::',
-    info => console.log('running at ', portNumber, info));
+    info => console.log('running at ', app.get('port'), info));
