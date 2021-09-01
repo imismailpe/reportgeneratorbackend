@@ -10,4 +10,4 @@ app.use(express.json());
 
 app.get('/', (req, res) => res.send('welcome to reportgenerator backend api'));
 
-app.listen(PORT, '0.0.0.0', info => console.log('running at ', portNumber, info));
+app.listen(PORT, process.env.HOST || '::', info => console.log('running at ', portNumber, info));
