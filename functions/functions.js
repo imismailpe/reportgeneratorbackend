@@ -24,11 +24,10 @@ const addBook = (request, response) => {
 }
 const deleteBook = (request, response) => {
     // postgresqlClient.connect();
-    console.log(request)
-    const { id } = request.body;
-    const QUERYSTR = 'DELETE FROM books WHERE ID = ($1);';
+    const id = request.params.id;
+    console.log(request.params)
+    const QUERYSTR = `DELETE FROM books WHERE ID = ${id};`;
     postgresqlClient.query(QUERYSTR,
-        [id],
         (err) => {
             if (err) throw err;
             response.status(201).json({ status: 'success', message: 'Book deleted.' });
