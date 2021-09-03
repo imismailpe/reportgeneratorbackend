@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const { PORT } = require('./config');
 const { Client } = require('pg');
+const { getBooks } = require('./functions/functions');
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
@@ -26,6 +27,8 @@ app.use(express.urlencoded());
 app.use(express.json());
 app.set('port', portNumber)
 app.get('/', (req, res) => res.send('welcome to reportgenerator backend api'));
+// app.get('/books', (req, res) => res.send(getBooks(req, res)));
+app.route('/books').get(getBooks)
 
 app.listen(portNumber,
     process.env.HOST || '::',
