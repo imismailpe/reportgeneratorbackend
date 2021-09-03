@@ -1,9 +1,9 @@
 const express = require('express');
 const cors = require('cors');
-const { PORT } = require('./config');
+const { PORT, postgresqlClient } = require('./config');
 const { getBooks, addBook } = require('./functions/functions');
 
-
+postgresqlClient.connect();
 
 const app = express();
 const portNumber = process.env.PORT || PORT;
