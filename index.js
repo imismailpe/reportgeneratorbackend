@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { PORT, postgresqlClient } = require('./config');
-const { getBooks,getBookss } = require('./functions/functions');
+const { getBooks, addBook } = require('./functions/functions');
 
 postgresqlClient.connect();
 
@@ -12,8 +12,7 @@ app.use(express.urlencoded());
 app.use(express.json());
 app.set('port', portNumber)
 app.get('/', (req, res) => res.send('welcome to reportgenerator backend api'));
-app.get('/bookss', (req, res) => res.send(getBookss(req, res)));
-app.route('/books').get(getBookss)
+app.route('/books').get(getBooks).post(addBook);
 
 app.listen(portNumber,
     process.env.HOST || '::',
