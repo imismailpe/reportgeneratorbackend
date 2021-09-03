@@ -24,7 +24,7 @@ const addBook = (request, response) => {
 }
 const deleteBook = (request, response) => {
     // postgresqlClient.connect();
-    console.log(request.body)
+    console.log(request)
     const { id } = request.body;
     const QUERYSTR = 'DELETE FROM books WHERE ID = ($1);';
     postgresqlClient.query(QUERYSTR,
