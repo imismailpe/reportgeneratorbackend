@@ -1,6 +1,7 @@
 const { postgresqlClient } = require("../config")
 
 const getBooks = (request, response) => {
+    postgresqlClient.connect();
     const QUERYSTR = 'SELECT * FROM books;';
     postgresqlClient.query(QUERYSTR,
         (err, results) => {
@@ -10,6 +11,7 @@ const getBooks = (request, response) => {
         });
 }
 const addBook = (request, response) => {
+    postgresqlClient.connect();
     const { author, title } = request.body;
     const QUERYSTR = 'INSERT INTO books (author, title) VALUES ($1, $2);';
     postgresqlClient.query(QUERYSTR,
