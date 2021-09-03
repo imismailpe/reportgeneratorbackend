@@ -22,4 +22,16 @@ const addBook = (request, response) => {
             // postgresqlClient.end();
         });
 }
-module.exports = { getBooks, addBook };
+const deleteBook = (request, response) => {
+    // postgresqlClient.connect();
+    const id = request.params.id;
+    console.log(request.params)
+    const QUERYSTR = `DELETE FROM books WHERE ID = ${id};`;
+    postgresqlClient.query(QUERYSTR,
+        (err) => {
+            if (err) throw err;
+            response.status(201).json({ status: 'success', message: 'Book deleted.' });
+            // postgresqlClient.end();
+        });
+}
+module.exports = { getBooks, addBook, deleteBook };
