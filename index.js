@@ -12,7 +12,8 @@ app.use(express.urlencoded());
 app.use(express.json());
 app.set('port', portNumber)
 app.get('/', (req, res) => res.send('welcome to reportgenerator backend api'));
-app.route('/books').get(getBooks).post(addBook);
+app.route('/books').get(getBooks);
+app.route('/addbook').post(addBook);
 
 app.listen(portNumber,
     process.env.HOST || '::',
