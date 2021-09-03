@@ -1,5 +1,15 @@
-const { pool } = require("../config")
+const { pool, postgresqlClient } = require("../config")
 
+
+
+const getBookss = (request, response) => {
+    postgresqlClient.query('SELECT * FROM books;', 
+    (err, results) => {
+        if (err) throw err;
+        response.status(200).json(results.rows);
+        postgresqlClient.end();
+      });
+}
 const getBooks = (request, response) => {
     pool.query(
         'SELECT * FROM books;',
@@ -13,4 +23,4 @@ const getBooks = (request, response) => {
     )
 }
 
-module.exports = { getBooks };
+module.exports = { getBooks,getBookss };
