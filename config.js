@@ -1,4 +1,14 @@
 require('dotenv').config();
+const { Client } = require('pg');
+
+//pool for postgres db: postgresql-fluffy-32892
+const postgresqlClient = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+//-----------
 const PORT = 3000;
 const isProduction = process.env.NODE_ENV === 'production';
 const connectionString = isProduction ?
@@ -11,4 +21,4 @@ const pool = new Pool({
     ssl: isProduction
 });
 console.log("connectionString-", isProduction, connectionString)
-module.exports = { PORT, pool };
+module.exports = { PORT, pool, postgresqlClient };
