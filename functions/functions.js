@@ -1,9 +1,9 @@
-const { postgresqlClient } = require("../config")
+const { postgresqlPool } = require("../config");
 
 const getBooks = (request, response) => {
     // postgresqlClient.connect();
     const QUERYSTR = 'SELECT * FROM books;';
-    postgresqlClient.query(QUERYSTR,
+    postgresqlPool.query(QUERYSTR,
         (err, results) => {
             if (err) throw err;
             response.status(200).json(results.rows);
@@ -14,7 +14,7 @@ const addBook = (request, response) => {
     // postgresqlClient.connect();
     const { author, title } = request.body;
     const QUERYSTR = 'INSERT INTO books (author, title) VALUES ($1, $2);';
-    postgresqlClient.query(QUERYSTR,
+    postgresqlPool.query(QUERYSTR,
         [author, title],
         (err) => {
             if (err) throw err;
@@ -27,7 +27,7 @@ const deleteBook = (request, response) => {
     const id = request.params.id;
     console.log(request.params)
     const QUERYSTR = `DELETE FROM books WHERE ID = ${id};`;
-    postgresqlClient.query(QUERYSTR,
+    postgresqlPool.query(QUERYSTR,
         (err) => {
             if (err) throw err;
             response.status(201).json({ status: 'success', message: 'Book deleted.' });
