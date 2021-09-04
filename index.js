@@ -16,5 +16,5 @@ app.route('/books').get(getBooks);
 app.route('/addbook').post(addBook);
 app.route('/deletebook/:id').delete(deleteBook);
 app.listen(portNumber,
-    process.env.HOST || '::',
+    // process.env.HOST || '::',
     info => console.log('running at ', app.get('port'), info));
