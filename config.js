@@ -13,7 +13,7 @@ const PORT = 3000;
 // `postgresql://${process.env.DB_USER1}:${process.env.DB_PASSWORD1}@${process.env.DB_HOST1}:${process.env.DB_PORT1}/${process.env.DB_DATABASE1}`;
 //pool for postgres db: postgresql-fluffy-32892
 const postgresqlPool = new Pool({
-    connectionString,
+    connectionString: process.env.DATABASE_URL,
     ssl: {
       rejectUnauthorized: false
     }
